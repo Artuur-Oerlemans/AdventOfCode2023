@@ -14,9 +14,6 @@ namespace AdventOfCode;
 public class Day12 : BaseDay
 {
     private readonly List<string> _input;
-    private readonly Dictionary<(int, int), string> _dict = new Dictionary<(int, int), string>();
-    private readonly int maxI;
-    private readonly int maxJ;
 
     public Day12()
     {
@@ -28,19 +25,6 @@ public class Day12 : BaseDay
                         ).Split("\r\n")
 ,
         ];
-        maxI = _input.Count;
-        maxJ = _input[0].Length;
-        for (int i = 0; i < _input.Count; i++)
-        {
-            for (int j = 0; j < _input[i].Length; j++)
-            {
-                if (_input[i][j] != '.')
-                {
-                    _dict.Add((i, j), "" + _input[i][j]);
-                }
-            }
-        }
-
     }
     public override ValueTask<string> Solve_1()
     {
@@ -69,7 +53,7 @@ public class Day12 : BaseDay
         }
 
         long result = 0;
-        for (int i = 0; i <= mys.Length; i++)
+        for (int i = 0; i <= mys.Length - nums.Sum(); i++)
         {
             string made = "";
             for(int j = 0; j < i; j++)
