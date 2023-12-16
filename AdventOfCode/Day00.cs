@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Numerics;
-using System.Runtime.Intrinsics;
-using System.Text.RegularExpressions;
-using static System.Reflection.Metadata.BlobBuilder;
+﻿using System.Text.RegularExpressions;
 
 namespace AdventOfCode;
 
 public class Day00 : BaseDay
 {
     private readonly List<string> _input;
-    private readonly Dictionary<(int, int), string> _dict = new Dictionary<(int, int), string>();
+    private readonly Dictionary<(int, int), char> _dict;
+    private readonly List<(int, int)> dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)];
     private readonly int maxI;
     private readonly int maxJ;
 
@@ -28,15 +20,17 @@ public class Day00 : BaseDay
                         ).Split("\r\n")
 ,
         ];
+
         maxI = _input.Count;
         maxJ = _input[0].Length;
+        _dict = new(maxI * maxJ);
         for (int i = 0; i < _input.Count; i++)
         {
             for (int j = 0; j < _input[i].Length; j++)
             {
                 if (_input[i][j] != '.')
                 {
-                    _dict.Add((i, j), "" + _input[i][j]);
+                    _dict.Add((i, j), _input[i][j]);
                 }
             }
         }
@@ -52,6 +46,48 @@ public class Day00 : BaseDay
     {
         long result = 0;
         return new ValueTask<string>($"Solution to {ClassPrefix} {result}, part 2");
+    }
+
+    private string DictToString(Dictionary<(int, int), char> dict)
+    {
+        string r = "";
+        for (int i = 0; i < maxI; i++)
+        {
+            for (int j = 0; j < maxJ; j++)
+            {
+                if (dict.ContainsKey((i, j)))
+                {
+                    r += dict[(i, j)];
+                }
+                else
+                {
+                    r += '.';
+                }
+            }
+            r += "\r\n";
+        }
+        return r;
+    }
+
+    private String LocationSetToString(HashSet<(int, int)> energized)
+    {
+        string r = "";
+        for (int i = 0; i < maxI; i++)
+        {
+            for (int j = 0; j < maxJ; j++)
+            {
+                if (energized.Contains((i, j)))
+                {
+                    r += "#";
+                }
+                else
+                {
+                    r += '.';
+                }
+            }
+            r += "\r\n";
+        }
+        return r;
     }
 
     private void L(Object o)

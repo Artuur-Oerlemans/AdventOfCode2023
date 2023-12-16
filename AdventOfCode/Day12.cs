@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Numerics;
-using System.Runtime.Intrinsics;
-using System.Text.RegularExpressions;
-using static System.Reflection.Metadata.BlobBuilder;
+﻿using System.Text.RegularExpressions;
 
 namespace AdventOfCode;
 
