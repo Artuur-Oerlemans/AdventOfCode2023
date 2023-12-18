@@ -5,10 +5,10 @@ namespace AdventOfCode;
 public class Day00 : BaseDay
 {
     private readonly List<string> _input;
-    private readonly Dictionary<(int, int), char> _dict;
-    private readonly List<(int, int)> dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)];
-    private readonly int maxI;
-    private readonly int maxJ;
+    private readonly Dictionary<(long, long), char> _dict;
+    private readonly List<(long, long)> dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)];
+    private readonly long maxI;
+    private readonly long maxJ;
 
     public Day00()
     {
@@ -23,7 +23,7 @@ public class Day00 : BaseDay
 
         maxI = _input.Count;
         maxJ = _input[0].Length;
-        _dict = new(maxI * maxJ);
+        _dict = [];
         for (int i = 0; i < _input.Count; i++)
         {
             for (int j = 0; j < _input[i].Length; j++)
@@ -107,17 +107,23 @@ move 3 to C";
             .Select(g => (int.Parse(g[1].Value), g[2].Value))
             .ToList().ForEach(t => Console.WriteLine(t.Item2));
     }
-    private (int, int) Add((int, int) a, (int, int) b)
+
+    private (long, long) Add((long, long) a, (long, long) b)
     {
         return (a.Item1 + b.Item1, a.Item2 + b.Item2);
     }
 
-    private int ManDis((int, int) a, (int, int) b)
+    private (long, long) Mul((long, long) a, long x)
+    {
+        return (a.Item1 * x, a.Item2 * x);
+    }
+
+    private long ManDis((long, long) a, (long, long) b)
     {
         return Math.Abs(a.Item1 - a.Item1) + Math.Abs(b.Item2 - b.Item2);
     }
 
-    private (int, int) Neg((int, int) p)
+    private (long, long) Neg((long, long) p)
     {
         return (-p.Item1, -p.Item2);
     }

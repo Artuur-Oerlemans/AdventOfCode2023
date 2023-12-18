@@ -1,0 +1,10 @@
+R 7 x
+D 6 x
+L 2 x
+U 4 x
+L 3 x
+D 2 x
+R 1 x
+D 2 x
+L 3 x
+U 6 x
