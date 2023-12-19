@@ -17,7 +17,7 @@ public class Day18 : BaseDay
             .. File.ReadAllText(string.Concat(InputFilePath.AsSpan(0, InputFilePath.Length - 4)
 //, "test"
 //, "test2"
-, "test3"
+//, "test3"
 , ".txt")
                         ).Split("\r\n")
 ,
